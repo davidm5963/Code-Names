@@ -21,7 +21,7 @@ export class FindGameComponent implements OnInit {
   }
 
   joinGame(){
-    this.gameService.joinGame(this.gameId, this.userName);
+    this.gameService.joinGame(this.gameId.value, this.userName.value);
   }
 
   get gameId(){
