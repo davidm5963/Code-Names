@@ -14,6 +14,8 @@ import { FindGameComponent } from './find-game/find-game.component';
 import { CreateGameComponent } from './create-game/create-game.component';
 import { GameWaitingComponent } from './game-waiting/game-waiting.component';
 
+import { GameService } from './services/game.service';
+
 import { environment } from '../environments/environment';
 
 @NgModule({
@@ -30,7 +32,7 @@ import { environment } from '../environments/environment';
     AngularFirestoreModule,
     AngularFireModule.initializeApp(environment.firebase)
   ],
-  providers: [],
+  providers: [GameService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
