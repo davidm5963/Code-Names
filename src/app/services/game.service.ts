@@ -8,7 +8,8 @@ export class GameService {
 
   constructor(private afs: AngularFirestore) { }
 
-  joinGame(userName: string, gameId: string){
+  joinGame(gameId: string, userName: string){
+    console.log(gameId);
     this.getGameById(gameId).get().then(doc => {
       console.log(doc.data());
         let players = doc.get('players');
