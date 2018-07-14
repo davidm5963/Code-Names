@@ -1,12 +1,13 @@
 <form [formGroup]="joinGameForm" class='joinGameForm' (ngSubmit)='joinGame()'>
   
-  <input 
-  formControlName ="gameId"
-  />
-  <input 
-  formControlName ="userName"
-  />
+    <mat-form-field>
+        <input matInput formControlName="userName" placeholder="Enter your name">
+      </mat-form-field>
+  
+      <mat-form-field>
+          <input matInput formControlName="gameId" placeholder="Game ID">
+      </mat-form-field>
 
-<button type="submit" class="chatButton" 
+<button mat-button type="submit" class="chatButton" 
 [disabled]="joinGameForm.invalid">Join Game</button>
 </form>
