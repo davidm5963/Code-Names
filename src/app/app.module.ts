@@ -27,6 +27,7 @@ import { GameWaitingComponent } from './game-waiting/game-waiting.component';
 import { GameService } from './services/game.service';
 
 import { environment } from '../environments/environment';
+import { appRoutes } from './Routes';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,9 @@ import { environment } from '../environments/environment';
     AngularFirestoreModule,
     ReactiveFormsModule,
     FormsModule,
-    AngularFireModule.initializeApp(environment.firebase)
+    AngularFireModule.initializeApp(environment.firebase),
+    RouterModule.forRoot(appRoutes)
+
   ],
   providers: [GameService],
   bootstrap: [AppComponent]
