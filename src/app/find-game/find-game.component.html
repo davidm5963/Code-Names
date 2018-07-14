@@ -1,3 +1,12 @@
-<p>
-  find-game works!
-</p>
+<form [formGroup]="joinGameForm" class='joinGameForm' (ngSubmit)='joinGame()'>
+  
+  <input 
+  formControlName ="gameId"
+  />
+  <input 
+  formControlName ="userName"
+  />
+
+<button type="submit" class="chatButton" 
+[disabled]="joinGameForm.invalid">Join Game</button>
+</form>
