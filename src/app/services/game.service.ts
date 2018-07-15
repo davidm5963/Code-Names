@@ -1,44 +1,63 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from 'angularfire2/firestore';
+import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
+import { Game } from '../models/game';
+import { Player } from '../models/player';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GameService {
 
+  currentGame: AngularFirestoreDocument<Game>;
+  currentPlayers: Player[];
+  currentPlayerId: string;
+
   constructor(private afs: AngularFirestore) { }
 
   joinGame(gameId: string, userName: string){
-    console.log(gameId);
-    this.getGameById(gameId).get().then(doc => {
-      console.log(doc.data());
+
+    this.afs.collection('players').add({
+      userName: userName,
+      isCreator: false,
+      role: '',
+      team: ''
+    }).then(user => {
+      this.currentPlayerId = user.id;
+      this.getGameById(gameId).ref.get().then(doc => {
         let players = doc.get('players');
         players.push({
-          userName: userName,
-          role: '',
-          isCreator: false
-        })
+          playerId: this.currentPlayerId
+        });
+        this.currentPlayers = players;
+        console.log(this.currentPlayers)        
         this.getGameById(gameId).update({players: players})
       }
     )
+    });    
   }
 
   createGame(userName: string){
-    this.afs.collection('games').add(
-      {
-        status: 'waiting',
-        board: [],
-        players: [{
-          userName: userName,
-          role: '',
-          isCreator: true
-        }]
-
-      }
-    )
+    this.afs.collection('players').add({
+      userName: userName,
+      isCreator: true,
+      role: '',
+      team: ''
+    }).then(creator => {
+      this.afs.collection('games').add(
+        {
+          status: 'waiting',
+          board: [],
+          players: [{
+            playerId: creator.id
+          }]
+        }
+      );
+    })
+    
   }
 
   getGameById(gameId: string){
-    return this.afs.doc('games/'+gameId).ref;
+    this.currentGame = this.afs.doc('games/'+gameId);
+    return this.currentGame;
   }
 }
