@@ -10,7 +10,6 @@ import { Router } from '@angular/router';
 export class GameService {
 
   currentGame: AngularFirestoreDocument<Game>;
-  currentPlayers: Player[];
   currentPlayerId: string;
 
   constructor(private afs: AngularFirestore, private router: Router) { }
@@ -29,10 +28,8 @@ export class GameService {
         players.push({
           playerId: this.currentPlayerId
         });
-        this.currentPlayers = players;
         this.router.navigate(['game/waiting', game.id])
         
-        console.log(this.currentPlayers)        
         this.getGameById(gameId).update({players: players});
         }
       )
