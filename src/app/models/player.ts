@@ -3,4 +3,5 @@ export class Player{
     role: string;
     isCreator: boolean;
     team: string;
+    gameId: string;
 }
