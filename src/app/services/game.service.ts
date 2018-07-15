@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { Game } from '../models/game';
 import { Player } from '../models/player';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class GameService {
   currentPlayers: Player[];
   currentPlayerId: string;
 
-  constructor(private afs: AngularFirestore) { }
+  constructor(private afs: AngularFirestore, private router: Router) { }
 
   joinGame(gameId: string, userName: string){
 
@@ -23,16 +24,18 @@ export class GameService {
       team: ''
     }).then(user => {
       this.currentPlayerId = user.id;
-      this.getGameById(gameId).ref.get().then(doc => {
-        let players = doc.get('players');
+      this.getGameById(gameId).ref.get().then(game => {
+        let players = game.get('players');
         players.push({
           playerId: this.currentPlayerId
         });
         this.currentPlayers = players;
+        this.router.navigate(['game/waiting', game.id])
+        
         console.log(this.currentPlayers)        
-        this.getGameById(gameId).update({players: players})
-      }
-    )
+        this.getGameById(gameId).update({players: players});
+        }
+      )
     });    
   }
 
@@ -50,6 +53,9 @@ export class GameService {
           players: [{
             playerId: creator.id
           }]
+        }
+      ).then(game => {
+          this.router.navigate(['game/waiting/', game.id])        
         }
       );
     })
