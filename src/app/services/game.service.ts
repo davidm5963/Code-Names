@@ -105,7 +105,21 @@ export class GameService {
     this.createBoard(gameId);
   }
 
-  
+  createBoard(gameId: string){
+    let board_size = 25;
+    let gameRef = this.afs.doc(`games/${gameId}`).ref;
+      gameRef.get().then(game => {
+        for (let index = 0; index < board_size; index++) {
+
+          this.afs.collection('cards').doc(Math.floor((Math.random()*29)+1).toString()).ref.get().then(doc =>{
+            console.log(doc.data());
+            this.afs.doc(`games/${gameId}`).collection('cards').doc(index.toString()).set(doc.data());
+          })
+          
+        }
+
+      })
+  }
 
   
 }
