@@ -1,3 +1,12 @@
-<p>
-  game-waiting works!
-</p>
+
+<div *ngIf="currentPlayer">
+    <h2>Waiting for game to start...</h2>
+    <h5>Current Players</h5>
+    <div *ngFor="let player of players | async">
+        <p>{{player.userName}}</p>
+    </div>
+    <div *ngIf="currentPlayer.isCreator" class="startGame">
+        <button mat-button (click)="onStartGame()">Start Game</button>
+    </div>
+    
+</div>
