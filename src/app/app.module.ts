@@ -6,7 +6,8 @@ import { FormsModule, ReactiveFormsModule, FormBuilder } from '@angular/forms';
 import { RouterModule } from '@angular/router'
 
 import { AngularFireModule } from 'angularfire2';
-import { AngularFirestoreModule } from 'angularfire2/firestore'
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFireAuthModule } from 'angularfire2/auth';
 
 //angular material modules
 import {MatInputModule} from '@angular/material';
@@ -41,7 +42,7 @@ import { appRoutes } from './Routes';
   imports: [
     MatButtonModule,
     MatInputModule,
-
+    AngularFireAuthModule,
     BrowserModule,
     BrowserAnimationsModule,
     AngularFirestoreModule,
