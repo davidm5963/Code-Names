@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { GameService } from '../services/game.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-board',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BoardComponent implements OnInit {
 
-  constructor() { }
+  gameId: string;
+
+  constructor(private gameService: GameService, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.gameId = this.route.snapshot.params['gameId'];
+    
   }
+
+
 
 }
