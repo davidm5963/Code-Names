@@ -100,6 +100,9 @@ export class GameService {
     return this.afs.doc(`games/${gameId}/players/${firebase.auth().currentUser.uid}`);
   }
 
+  getGameCards(gameId: string){
+    return this.afs.collection(`games/${gameId}/cards`);
+  }
   startGame(gameId: string){
     this.afs.doc(`games/${gameId}`).update({status: 'in progress'});
     this.createBoard(gameId);
