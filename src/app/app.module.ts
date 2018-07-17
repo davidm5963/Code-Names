@@ -29,6 +29,8 @@ import { environment } from '../environments/environment';
 import { appRoutes } from './Routes';
 import { CodemasterMessageFormComponent } from './codemaster-message-form/codemaster-message-form.component';
 import { GameComponent } from './game/game.component';
+import { PlayerService } from './services/player.service';
+import { ClueListComponent } from './clue-list/clue-list.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +41,7 @@ import { GameComponent } from './game/game.component';
     GameWaitingComponent,
     CodemasterMessageFormComponent,
     GameComponent,
+    ClueListComponent,
   ],
   imports: [
     MatButtonModule,
@@ -57,7 +60,7 @@ import { GameComponent } from './game/game.component';
     RouterModule.forRoot(appRoutes)
 
   ],
-  providers: [GameService],
+  providers: [GameService, PlayerService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
