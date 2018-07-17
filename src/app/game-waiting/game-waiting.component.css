@@ -1,0 +1,29 @@
+h2{
+    font-weight: 600;
+}
+
+.wrapper{
+    width: 75%;
+    margin: auto;
+    padding: 0;
+    height: auto;
+}
+
+.header{
+    background: #9BC2CF;    
+    font-size: 24px;
+}
+
+.players{
+    float: left;
+    width: 50%;
+}
+
+.startGame{
+    float: left;
+    width: 50%;
+}
+
+.button{
+    background: #9BC2CF;        
+}
