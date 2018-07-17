@@ -104,7 +104,7 @@ export class GameService {
       switchMap(user => {
         if (user) {
           // logged in, get custom user from Firestore
-          return this.afs.doc(`games/${gameId}/players/${user.uid}`).valueChanges();
+          return this.afs.doc<Player>(`games/${gameId}/players/${user.uid}`).valueChanges();
         }
       })
     )
@@ -138,13 +138,30 @@ export class GameService {
   }
 
   setPlayers(gameId: string){
-    this.afs.collection(`games/${gameId}/players`).ref.get().then(players =>{
+    let playersRef = this.afs.collection(`games/${gameId}/players`).ref;
+    playersRef.get().then(players =>{
       let i = 0;
       players.forEach(player => {
         i++
-        player.ref.update({team: (i%2==0 ? 'red' : 'blue')})
+        player.ref.update({team: (i%2==0 ? 'red' : 'blue'), role: 'detective'})
       })
     })
+
+    playersRef.where('team', '==', 'red').where(firebase.firestore.FieldPath.documentId(), '>', (Math.random()*2).toString())
+    .limit(1)
+    .get().then(player => {
+      player.forEach(player => {
+        this.afs.collection(`games/${gameId}/players`).doc(player.id).ref.update({role: 'codemaster'});
+      })
+    });
+
+    playersRef.where('team', '==', 'blue').where(firebase.firestore.FieldPath.documentId(), '>', (Math.random()*2).toString())
+    .limit(1)
+    .get().then(player => {
+      player.forEach(player => {
+        this.afs.collection(`games/${gameId}/players`).doc(player.id).ref.update({role: 'codemaster'});
+      })
+    });
   }
 
   
