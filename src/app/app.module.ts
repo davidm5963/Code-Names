@@ -14,12 +14,10 @@ import {MatInputModule} from '@angular/material';
 import {MatButtonModule} from '@angular/material';
 import {MatFormFieldModule} from '@angular/material';
 import {MatCardModule} from '@angular/material/card';
-
-
+import {MatGridListModule} from '@angular/material/grid-list';
 
 import { AppComponent } from './app.component';
 import { BoardComponent } from './board/board.component';
-import { CardComponent } from './card/card.component';
 import { FindGameComponent } from './find-game/find-game.component';
 import { CreateGameComponent } from './create-game/create-game.component';
 import { GameWaitingComponent } from './game-waiting/game-waiting.component';
@@ -34,7 +32,6 @@ import { appRoutes } from './Routes';
   declarations: [
     AppComponent,
     BoardComponent,
-    CardComponent,
     FindGameComponent,
     CreateGameComponent,
     GameWaitingComponent,
@@ -43,6 +40,9 @@ import { appRoutes } from './Routes';
     MatButtonModule,
     MatInputModule,
     MatCardModule,
+    MatGridListModule,
+
+    
     AngularFireAuthModule,
     BrowserModule,
     BrowserAnimationsModule,
