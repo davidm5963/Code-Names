@@ -27,6 +27,8 @@ import { GameService } from './services/game.service';
 
 import { environment } from '../environments/environment';
 import { appRoutes } from './Routes';
+import { CodemasterMessageFormComponent } from './codemaster-message-form/codemaster-message-form.component';
+import { GameComponent } from './game/game.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +37,8 @@ import { appRoutes } from './Routes';
     FindGameComponent,
     CreateGameComponent,
     GameWaitingComponent,
+    CodemasterMessageFormComponent,
+    GameComponent,
   ],
   imports: [
     MatButtonModule,
