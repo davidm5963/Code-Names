@@ -1,12 +1,19 @@
 
-<div *ngIf="currentPlayer">
-    <h2>Waiting for game to start...</h2>
-    <h5>Current Players</h5>
-    <div *ngFor="let player of players | async">
-        <p>{{player.userName}}</p>
-    </div>
-    <div *ngIf="currentPlayer.isCreator" class="startGame">
-        <button mat-button (click)="onStartGame()">Start Game</button>
+<mat-card class="wrapper" *ngIf="currentPlayer">
+    <mat-card-header class="header">
+            <mat-card-title>Waiting for game to start...</mat-card-title>  
+    </mat-card-header>
+
+    <div class="players">
+            <h2>Current Players</h2>
+            <div *ngFor="let player of players | async">
+                <p>{{player.userName}}</p>
+            </div>
     </div>
     
-</div>
+    <div *ngIf="currentPlayer.isCreator" class="startGame">
+        <h2>Ready To Play?</h2>
+        <button mat-button class="button" (click)="onStartGame()">Start Game</button>
+    </div>
+    
+</mat-card>
