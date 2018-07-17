@@ -1,0 +1,21 @@
+.card{
+    margin: 10px;
+    width: auto;
+    font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+    color: whitesmoke;
+    text-transform: uppercase;
+    opacity: .9;
+    background: #c7c7c7
+}
+
+.notCodeMaster:hover{
+    cursor: pointer;
+}
+
+.red{
+    background: rgb(255, 52, 52);
+}
+
+.blue{
+    background: rgb(72, 141, 211);
+}
