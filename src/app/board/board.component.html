@@ -1,3 +1,9 @@
-<p>
-  board works!
-</p>
+<mat-grid-list cols="5" rowHeight="100px">
+      <div *ngFor="let card of cards | async">
+          <mat-grid-tile class="card"  [ngStyle]="{'background-color' : isCodeMaster ? card.team : '#c7c7c7'}" 
+              md-colspan = "2"
+              md-rowspan = "2">
+              {{card.word}}
+          </mat-grid-tile>
+      </div>
+</mat-grid-list>
