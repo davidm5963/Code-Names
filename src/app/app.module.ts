@@ -13,7 +13,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import {MatInputModule} from '@angular/material';
 import {MatButtonModule} from '@angular/material';
 import {MatFormFieldModule} from '@angular/material';
-import {MatCheckboxModule} from '@angular/material';
+import {MatCardModule} from '@angular/material/card';
 
 
 
@@ -42,6 +42,7 @@ import { appRoutes } from './Routes';
   imports: [
     MatButtonModule,
     MatInputModule,
+    MatCardModule,
     AngularFireAuthModule,
     BrowserModule,
     BrowserAnimationsModule,
