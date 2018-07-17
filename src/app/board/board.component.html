@@ -1,6 +1,9 @@
+
+<button mat-button (click)="endTurn()" class="endTurn" 
+[disabled]="!isTurn">Finish Turn</button>
 <mat-grid-list cols="5" rowHeight="100px">
       <div *ngFor="let card of cards | async">
-          <mat-grid-tile class="card"  [ngStyle]="{'background-color' : isCodeMaster ? card.team : '#c7c7c7'}" 
+          <mat-grid-tile (click)="onCardClick(card)" class="card"  [ngClass]="isCodeMaster || card.status=='found' ? card.team : 'notCodeMaster'"
               md-colspan = "2"
               md-rowspan = "2">
               {{card.word}}
