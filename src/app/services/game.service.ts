@@ -7,6 +7,8 @@ import { Observable } from 'rxjs';
 
 import { AngularFireAuth } from 'angularfire2/auth';
 
+import { switchMap, filter } from 'rxjs/operators';
+
 import * as firebase from 'firebase/app';
 
 @Injectable({
@@ -97,7 +99,15 @@ export class GameService {
   }
 
   getCurrentPlayer(gameId: string){
-    return this.afs.doc(`games/${gameId}/players/${firebase.auth().currentUser.uid}`);
+
+    return this.afAuth.authState.pipe(
+      switchMap(user => {
+        if (user) {
+          // logged in, get custom user from Firestore
+          return this.afs.doc(`games/${gameId}/players/${user.uid}`).valueChanges();
+        }
+      })
+    )
   }
 
   getGameCards(gameId: string){
@@ -114,11 +124,13 @@ export class GameService {
     let gameRef = this.afs.doc(`games/${gameId}`).ref;
       gameRef.get().then(game => {
         for (let index = 0; index < board_size; index++) {
-
+          //add random card to cards collection in game document
           this.afs.collection('cards').doc(Math.floor((Math.random()*29)+1).toString()).ref.get().then(doc =>{
-            console.log(doc.data());
+            console.log(doc.data())
             this.afs.doc(`games/${gameId}`).collection('cards').doc(index.toString()).set(doc.data());
-          })
+          //update the cards team color
+          this.afs.doc(`games/${gameId}`).collection('cards').doc(index.toString()).ref.update({team: (index%2==0 ? 'red' : 'blue')});
+        })
           
         }
 
