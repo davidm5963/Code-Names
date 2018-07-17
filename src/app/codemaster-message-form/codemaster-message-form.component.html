@@ -1,3 +1,14 @@
-<p>
-  codemaster-message-form works!
-</p>
+
+
+<div *ngIf="isCodemaster">
+
+  <form [formGroup]="messageForm" class='messageForm' (ngSubmit)='sendClue()'>
+      <mat-form-field>
+          <input matInput formControlName="clue" placeholder="Message">
+      </mat-form-field>
+
+      <button mat-button type="submit"
+      [disabled]="messageForm.invalid || !isTurn">Send Clue!</button>
+
+      </form>
+</div>
