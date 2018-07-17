@@ -103,6 +103,7 @@ export class GameService {
   startGame(gameId: string){
     this.afs.doc(`games/${gameId}`).update({status: 'in progress'});
     this.createBoard(gameId);
+    this.setPlayers(gameId);
   }
 
   createBoard(gameId: string){
@@ -119,6 +120,16 @@ export class GameService {
         }
 
       })
+  }
+
+  setPlayers(gameId: string){
+    this.afs.collection(`games/${gameId}/players`).ref.get().then(players =>{
+      let i = 0;
+      players.forEach(player => {
+        i++
+        player.ref.update({team: (i%2==0 ? 'red' : 'blue')})
+      })
+    })
   }
 
   
