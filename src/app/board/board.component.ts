@@ -10,12 +10,17 @@ import { ActivatedRoute } from '@angular/router';
 export class BoardComponent implements OnInit {
 
   gameId: string;
+  cards: any;
+  isCodeMaster: boolean;
 
   constructor(private gameService: GameService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.gameId = this.route.snapshot.params['gameId'];
-    
+    this.cards = this.gameService.getGameCards(this.gameId).valueChanges();
+    this.gameService.getCurrentPlayer(this.gameId).subscribe(player => {
+      this.isCodeMaster = player.role == 'codemaster';
+    })
   }
 
 
