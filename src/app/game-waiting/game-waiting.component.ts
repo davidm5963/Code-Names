@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 
 import * as firebase from 'firebase/app';
 import { SELECT_PANEL_INDENT_PADDING_X } from '@angular/material';
+import { PlayerService } from '../services/player.service';
 
 @Component({
   selector: 'app-game-waiting',
@@ -20,7 +21,7 @@ export class GameWaitingComponent implements OnInit {
   players: Observable<Player[]>;
   currentPlayer: any;
 
-  constructor(private gameService: GameService, private route: ActivatedRoute, private router: Router) {
+  constructor(private gameService: GameService, private route: ActivatedRoute, private router: Router, private playerService: PlayerService) {
 
    }
    
@@ -34,12 +35,12 @@ export class GameWaitingComponent implements OnInit {
       }
     });
     
-    this.players = this.gameService.getPlayers(this.gameId).valueChanges();
+    this.players = this.playerService.getPlayers(this.gameId).valueChanges();
 
     this.getUser();
   }
   getUser(){
-      this.gameService.getCurrentPlayer(this.gameId).subscribe(player =>{
+      this.playerService.getCurrentPlayer(this.gameId).subscribe(player =>{
         console.log(player)
         this.currentPlayer = player;
       });  
