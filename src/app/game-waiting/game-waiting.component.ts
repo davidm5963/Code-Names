@@ -24,10 +24,6 @@ export class GameWaitingComponent implements OnInit {
 
    }
    
-   sleep (time) {
-    return new Promise((resolve) => setTimeout(resolve, time));
-  }
-
   ngOnInit() {
     console.log("ngOnInit called")
     this.gameId = this.route.snapshot.params['gameId'];
@@ -43,12 +39,10 @@ export class GameWaitingComponent implements OnInit {
     this.getUser();
   }
   getUser(){
-    this.sleep(1000).then(() =>{
-      this.gameService.getCurrentPlayer(this.gameId).valueChanges().subscribe(player =>{
+      this.gameService.getCurrentPlayer(this.gameId).subscribe(player =>{
         console.log(player)
         this.currentPlayer = player;
       });  
-    })
   }
   onStartGame(){
     this.gameService.startGame(this.gameId);
