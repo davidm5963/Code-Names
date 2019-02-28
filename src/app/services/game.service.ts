@@ -104,7 +104,7 @@ export class GameService {
   }
 
   getClues(gameId: string, team: string){
-    return this.afs.collection(`games/${gameId}/clues/`).ref.where('team', '==', team);
+    return this.afs.collection(`games/${gameId}/clues/`, ref => ref.where('team', '==', team));
   }
 
   switchTurns(gameId: string, currentTurn: string){
