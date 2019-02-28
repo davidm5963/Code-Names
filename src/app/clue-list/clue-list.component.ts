@@ -17,7 +17,6 @@ export class ClueListComponent implements OnInit {
   constructor(private route: ActivatedRoute, private gameService: GameService, private playerService: PlayerService) { }
 
   ngOnInit() {
-    console.log("calling lcue list on init")
     this.gameId = this.route.snapshot.params['gameId'];
     this.playerService.getCurrentPlayer(this.gameId).subscribe(player => {
       this.currentTeam = player.team;
